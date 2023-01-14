@@ -1,0 +1,20 @@
+<!-- to render these html webpages we need to have some controller which will specify actions -->
+<html>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+    </head>
+    <body>
+        <div>
+            <form action="/users/create-session" method="post">
+                <input type="email" name="email" placeholder="Your Email" required>
+                <input type="password" name="password" placeholder="Your Password" required >
+                <input type="submit" value="Sign in">
+
+                <!-- bcoz key value pairs which go to the server so name acts as key  -->
+            </form>
+        </div>
+        
+    </body>
+</html>

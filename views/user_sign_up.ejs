@@ -1,0 +1,22 @@
+<!-- to render these html webpages we need to have some controller which will specify actions -->
+<html>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+    </head>
+    <body>
+        <div>
+            <form action="/users/create" method="post">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <input type="password" name="password" placeholder="Your Password" required>
+                <input type="password" name="confirm_password" placeholder="Comfirm Password" required>
+                <input type="submit" value="Sign up">
+
+                <!-- bcoz key value pairs which go to the server so name acts as key  -->
+            </form>
+        </div>
+        
+    </body>
+</html>
