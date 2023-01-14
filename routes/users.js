@@ -11,8 +11,9 @@ router.get('/sign-up',usersController.signUp);
 
 router.get('/sign-in',usersController.signIn);
 router.post('/create',usersController.create);
-// router.post('/createSession',usersController.createSession);
 
+router.post('/create-session',usersController.createSession);
 
+ 
 //export this router file and then we can access it un main index file 
 module.exports =router;

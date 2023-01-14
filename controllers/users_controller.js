@@ -3,7 +3,21 @@ const { response } = require("express");
 
 
 module.exports.profile=function(request,response){
-    response.end('<h1>User Profile</h1>');
+    if(request.cookies.user_id){
+        User.findById(request.cookies.user_id,function(error,user){
+            if(user){
+                return response.render('user_profile',{
+                    title : "User Profile",
+                    user: user
+                });
+            }
+            return response.redirect('/users/sign-in');
+        });
+    }
+    else{
+        return response.redirect('/users/sign-in');
+
+    }
 
 }
 //now this controller/action is ready to be accessed by router so i need to create a route
@@ -53,5 +67,25 @@ module.exports.create=function(request,response){
 };
 //sign in and create session for the user
 module.exports.createSession = function(request,response){
-    //to do
+    //Steps to authenticate
+    //find the user
+    User.findOne({email : request.body.email},function(error,user){
+        if(error){console.log('error in finding user in signing in');return}
+    //handle user found 
+    if(user){
+        //handle password which doesn't match
+        if(user.password != request.body.password){
+            return response.redirect('back');
+        }
+        //handle session creation ie if passwoed matches we send cookie to the  db
+        response.cookie('user_id',user.id);
+        // ie cookie ke jariye jo user_id aayi hai wahi user ki id hai aur cookie je jariye hamne store karli id user ki now we will use it for authentication fo next time he checks in
+        return response.redirect('/users/profile');
+    }
+    else{
+    //handle user not found
+    return response.redirect('back'); 
+    }
+    });
+
 };
